@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
 import './styles.css'
+import api from "./api"
 
 function App() {
   const [form, setForm] = useState({
@@ -95,7 +96,7 @@ function App() {
 
 const fetchDashboardData = async () => {
   try {
-    const res = await axios.get("http://localhost:8000/dashboard/", {
+    const res = await api.get("/dashboard/", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -127,7 +128,7 @@ const fetchDashboardData = async () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.post('http://localhost:8000/applications/', form, {
+      await api.post('/applications/', form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert('Application created!');
@@ -150,7 +151,7 @@ const fetchDashboardData = async () => {
     if (!window.confirm('Are you sure you want to delete this application?')) return;
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:8000/applications/${id}`, {
+      await api.delete(`/applications/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchApplications();
@@ -177,7 +178,7 @@ const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem("token");
       const { company, position, location, status, notes } = editForm;
-      await axios.put(`http://localhost:8000/applications/${editingId}`, {
+      await api.put(`/applications/${editingId}`, {
         company, position, location, status, notes
       }, {
         headers: { Authorization: `Bearer ${token}` },
@@ -198,7 +199,7 @@ const fetchDashboardData = async () => {
   const fetchApplications = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:8000/applications/", {
+      const res = await api.get("/applications/", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setApplications(res.data);
@@ -224,7 +225,7 @@ const fetchDashboardData = async () => {
     e.preventDefault();
     try {
       console.log("Login form payload:", loginForm);
-      const res = await axios.post("http://localhost:8000/login", loginForm);
+      const res = await api.post("/login", loginForm);
       const token = res.data.access_token;
       localStorage.setItem("token", token);
       setLoggedIn(true);
@@ -244,7 +245,7 @@ const handleSignup = async (e) => {
   e.preventDefault();
   try {
     console.log("Signup payload:", signupForm);
-    const res = await axios.post("http://localhost:8000/register", signupForm);
+    const res = await api.post("/register", signupForm);
     alert("Signup successful! You can now log in.");
     setIsSigningUp(false);
   } catch (error) {
@@ -299,7 +300,7 @@ const handleResumeSubmit = async (e) => {
 
   try {
     const token = localStorage.getItem("token");
-    const res = await axios.post("http://localhost:8000/analyze-resume/", formData, {
+    const res = await api.post("/analyze-resume/", formData, {
       headers: {
         "Authorization": `Bearer ${token}`,
         "Content-Type": "multipart/form-data",
