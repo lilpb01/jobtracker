@@ -20,7 +20,6 @@ app = FastAPI()
 
 ALLOWED_ORIGINS = ["http://localhost:5178",
     "http://127.0.0.1:5178",
-
     "http://localhost:5173",
     "http://127.0.0.1:5173",]
 
@@ -132,6 +131,10 @@ def dashboard_summary(db: Session = Depends(get_db), current_user: models.User =
         "applications_over_time": [{"date": str(date), "count": count} for date, count in date_counts]
     })
 
+
+@app.get("/health")
+def health():
+    return {"ok": True}
 
 
 
