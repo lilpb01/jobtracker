@@ -22,7 +22,7 @@ ALLOWED_ORIGINS = ["http://localhost:5178",
     "http://127.0.0.1:5178",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://jobtracker-4def.onrender.com/"]
+    "https://jobtracker-4def.onrender.com"]
 
 
 
