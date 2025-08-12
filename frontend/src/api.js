@@ -1,7 +1,7 @@
 import axios from 'axios';
 const API = import.meta.env.VITE_API_URL || "http://localhost:8000"; // fallback for local dev
 
-const api = axios.create({ baseURL: API, timeout: 12000,});
+const api = axios.create({ baseURL: API,});
 
 // Attach token to every request
 api.interceptors.request.use((config) => {

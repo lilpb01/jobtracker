@@ -245,37 +245,14 @@ const handleSignup = async (e) => {
   e.preventDefault();
   try {
     console.log("Signup payload:", signupForm);
-
-    // Show a friendly hint before the first attempt
-    let warned = false;
-    const res = await warmupRetry(async () => {
-      try {
-        return await api.post("/register", signupForm);
-      } catch (err) {
-        // First failure: tell the user the server might be waking up
-        if (!warned) {
-          warned = true;
-          // replace alert() with your toast/snackbar if you have one
-          alert("The server is waking up — this can take ~30–60 seconds the first time.");
-        }
-        throw err;
-      }
-    });
-
+    const res = await api.post("/register", signupForm);
     alert("Signup successful! You can now log in.");
     setIsSigningUp(false);
   } catch (error) {
     console.error("Signup error:", error);
-    // If it was a network/5xx after retries, give a clearer message
-    const status = error?.response?.status;
-    if (!status || (status >= 500 && status <= 599)) {
-      alert("Still waking up or temporarily unavailable. Please try again in a moment.");
-    } else {
-      alert(error?.response?.data?.detail || "Signup failed. Email may already be in use.");
-    }
+    alert("Signup failed. Email may already be in use.");
   }
 };
-
 
   const getRowStyle = (status) => {
   switch (status.toLowerCase()) {
