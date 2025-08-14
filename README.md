@@ -34,9 +34,6 @@ Built with **FastAPI** + **SQLite** (backend) and **Vite + React + Tailwind CSS*
 - Python-Decouple
 - CORS Middleware
 
-**AI/ML:**
-- OpenAI API (for resume analysis)
-
 **Deployment:**
 - Frontend → Vercel  
 - Backend → Render  
