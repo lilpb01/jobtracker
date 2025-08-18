@@ -5,7 +5,7 @@ Built with **FastAPI** + **SQLite** (backend) and **Vite + React + Tailwind CSS*
 
 ---
 
-## 🚀 Features
+##  Features
 
 - **User Authentication** (Sign up / Login) with JWT
 - **Add / Edit / Delete** job applications
@@ -19,7 +19,7 @@ Built with **FastAPI** + **SQLite** (backend) and **Vite + React + Tailwind CSS*
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 **Frontend:**
 - React (Vite)
